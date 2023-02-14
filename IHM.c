@@ -6,8 +6,9 @@
 
 
 // tab est un tableau à deux dim
-void display_grille(unsigned char tab[][6])
+void display_grille(int tab[][6])
 {
+    printf("\n\n1 2 3 4 5 6 7\n");
     char line[13] = {'#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', ' ', '#'};
     // line = malloc (sizeof (*line) * 8);
     int x, y, i;
@@ -42,11 +43,20 @@ void display_grille(unsigned char tab[][6])
     }
 }
 
-unsigned char ask_user(unsigned char current_player)
+int ask_user(int current_player)
 {   
-    unsigned char selected_column;
-    printf("Joueur %d : À ton tours !", current_player);
+    int selected_column;
+    printf("Joueur %d : À ton tours !\n", current_player);
     printf("Choix de la colonne : ");
-    scanf("%c", &selected_column);
+    scanf("%d", &selected_column);
     return selected_column;
 }
+
+void column_out_of_range() {
+    printf("Veuillez choisir une colonne entre 1 et 7");
+}
+
+void no_more_space_avaible() {
+    printf("La colonne choisie est pleine!\nVeuillez en choisir une autre !");
+}
+

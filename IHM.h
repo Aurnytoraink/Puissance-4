@@ -1,2 +1,4 @@
-void display_grille(unsigned char tab[][6]);
-unsigned char ask_user(unsigned char current_player);
+void display_grille(int tab[][6]);
+int ask_user(int current_player);
+void column_out_of_range();
+void no_more_space_avaible();
