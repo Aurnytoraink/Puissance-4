@@ -18,19 +18,19 @@ void display_grille(int tab[][6])
         {
             switch (tab[x][y])
             {
-            case 0: // vide
+            case -1: // vide
             {
                 line[i] = '#';
             }
             break;
 
-            case 1: // Joueur 1
+            case 0: // Joueur 1
             {
                line[i] = 'X';
             }
             break;
 
-            case 2: // Joueur 2
+            case 1: // Joueur 2
             {
                 line[i] = 'O';
             }
@@ -43,13 +43,16 @@ void display_grille(int tab[][6])
     }
 }
 
-int ask_user(int current_player)
+int ask_user_column(int current_player)
 {   
-    int selected_column;
-    printf("Joueur %d : À ton tours !\n", current_player);
-    printf("Choix de la colonne : ");
-    scanf("%d", &selected_column);
-    return selected_column;
+    int selected_column = 0;
+    printf("Joueur %d : À ton tours !\n", current_player + 1);
+    do
+    {
+        printf("Choix de la colonne : ");
+        scanf("%d", &selected_column);
+    } while (selected_column<1 || selected_column>7);
+    return selected_column - 1;
 }
 
 void column_out_of_range() {
