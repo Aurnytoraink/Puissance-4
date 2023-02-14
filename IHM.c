@@ -8,30 +8,30 @@
 // tab est un tableau à deux dim
 void display_grille(unsigned char tab[][6])
 {
-    char line[7] = {'#','#','#','#','#','#','#'};
+    char line[13] = {'#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', ' ', '#'};
     // line = malloc (sizeof (*line) * 8);
-    int x = 0, y = 0;
+    int x, y, i;
     for (y = 0; y < 6; y++)
     {
-        for (x = 0; x < 7; x++)
+        for (x = 0, i = 0; x < 7, i<13; x++, i = i + 2)
         {
             switch (tab[x][y])
             {
             case 0: // vide
             {
-                line[x] = '#';
+                line[i] = '#';
             }
             break;
 
             case 1: // Joueur 1
             {
-               line[x] = 'X';
+               line[i] = 'X';
             }
             break;
 
             case 2: // Joueur 2
             {
-                line[x] = 'O';
+                line[i] = 'O';
             }
             break;
 
