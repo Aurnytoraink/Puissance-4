@@ -63,3 +63,6 @@ void no_more_space_avaible() {
     printf("La colonne choisie est pleine!\nVeuillez en choisir une autre !");
 }
 
+void display_winner(int player) {
+    printf("Bravo joueur %d !\nTu es vraiment intelligent.",player + 1);
+}

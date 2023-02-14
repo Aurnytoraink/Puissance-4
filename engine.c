@@ -50,6 +50,6 @@ void Demarre_puissance4() {
             no_more_space_avaible();
         }
     }
-    
-    
+
+    display_winner(current_player);
 }
