@@ -46,7 +46,7 @@ void display_grille(int tab[][6])
 int ask_user_column(int current_player)
 {   
     int selected_column = 0;
-    printf("Joueur %d : À ton tours !\n", current_player + 1);
+    printf("Joueur %d : À ton tour !\n", current_player + 1);
     do
     {
         printf("Choix de la colonne : ");
