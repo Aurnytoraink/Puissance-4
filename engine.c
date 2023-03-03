@@ -47,9 +47,10 @@ int search_pieces_in_line(int x_min, int x_max, int y_min, int y_max, int invers
     */
     int x, y;
     int pieces = 0;
+    printf("%d,%d,%d,%d\n",x_min,x_max,y_min,y_max);
     if (inverse == 0)
     {
-        for (x = x_min, y = y_min; x < x_max && y < y_max; x++, y++)
+        for (x = x_min, y = y_min; x < x_max, y < y_max; x++, y++)
         {
             if (grille[x][y] == current_player)
             {
@@ -68,7 +69,7 @@ int search_pieces_in_line(int x_min, int x_max, int y_min, int y_max, int invers
     }
     else
     {
-        for (x = x_min, y = y_min; x < x_max && y < y_max; x++, y--)
+        for (x = x_min, y = y_min; x < x_max, y < y_max; x++, y--)
         {
             if (grille[x][y] == current_player)
             {
@@ -177,7 +178,7 @@ void Demarre_puissance4()
 
     if (filled_case == 42)
     {
-        printf("Plus de place !\nVous êtes à égalité !");
+        display_full();
     }
     else
     {

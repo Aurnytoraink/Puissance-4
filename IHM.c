@@ -66,3 +66,7 @@ void no_more_space_avaible() {
 void display_winner(int player) {
     printf("Bravo joueur %d !\nTu es vraiment intelligent.\nTiens, tu as gagné un cookie !",player + 1);
 }
+
+void display_full() {
+    printf("Plus de place !\nVous êtes à égalité !");
+}
