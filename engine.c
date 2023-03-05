@@ -39,107 +39,69 @@ int last_pos_avaible(int colonne)
     return i - 1;
 }
 
-int search_pieces_in_line(int x_min, int x_max, int y_min, int y_max, int inverse)
-{
-    /*
-    Une boucle for à deux variables qui parcours tous les éléments
-    Il faut que le code return vrai dès que 4 pieces sont détectés
-    */
-    int x, y;
+int recherche_ord_down(int x, int y, int sens) {
     int pieces = 0;
-    printf("%d,%d,%d,%d\n",x_min,x_max,y_min,y_max);
-    if (inverse == 0)
-    {
-        for (x = x_min, y = y_min; x < x_max, y < y_max; x++, y++)
-        {
-            if (grille[x][y] == current_player)
-            {
-                pieces++;
-            }
-            else
-            {
-                pieces = 0;
-            }
+    int j = y;
+    while (grille[x][j] == current_player && j<6) {
+        if(sens==1) {
+            j++;
+        }
+        else {
+            j--;
+        }
+        pieces++;
+    }
+    return (pieces == 4);
+}
 
-            if (pieces == 4)
-            {
-                return 1;
-            }
+int recherche_ord_up(int x, int y, int sens) {
+    int pieces = 0;
+    int j = y;
+    while (grille[x][j] == current_player &&j > 0) {
+        if(sens==1) {
+            j++;
+        }
+        else {
+            j--;
+        }
+        pieces++;
+    }
+    return (pieces == 4);
+}
+
+int recherche_abs(int x, int y, int sens) {
+    int pieces = 0;
+    int i = x;
+    while (grille[i][y] == current_player && i<7) {
+        if(sens==1) {
+            i++;
+        }
+        else {
+            i--;
+        }
+        pieces++;
+    }
+    return (pieces == 4);
+}
+
+int recherche_abs(int x, int y, int sens) {
+    int pieces = 0;
+    int i = x;
+    while (grille[i][y] == current_player && i<7) {
+        if(sens==1) {
+            pieces++;
+        }
+        else {
+            pieces--;
         }
     }
-    else
-    {
-        for (x = x_min, y = y_min; x < x_max, y < y_max; x++, y--)
-        {
-            if (grille[x][y] == current_player)
-            {
-                pieces++;
-            }
-            else
-            {
-                pieces = 0;
-            }
-
-            if (pieces == 4)
-            {
-                return 1;
-            }
-        }
-    }
-    return 0;
+    return (pieces == 4);
 }
 
 // Renvoie 1 (vrai) si une ligne de 4 pions est détectée
 int is_winning_line(int x, int y)
 {
-    int x_min, x_max, y_min, y_max;
-    int inverse = 0;
-    // VEC1 [1,1] diag sup
-    x_min = (x - 3 < 0) ? 0 : x - 3;
-    x_min = (x + 3 > 6) ? 6 : x + 3;
-    y_min = (y - 3 < 0) ? 0 : y - 3;
-    y_max = (y + 3 > 5) ? 5 : y + 3;
-
-    if (search_pieces_in_line(x_min, x_max, y_min, y_max, inverse) == 1)
-    {
-        return 1;
-    }
-
-    // VEC2 [0,1] ord
-    x_min = x;
-    x_max = x;
-    y_min = (y - 3 < 0) ? 0 : y - 3;
-    y_max = (y + 3 > 5) ? 5 : y + 3;
-
-    if (search_pieces_in_line(x_min, x_max, y_min, y_max, inverse) == 1)
-    {
-        return 1;
-    }
-
-    // VEC3 [1,0] abs
-    x_min = (x - 3 < 0) ? 0 : x - 3;
-    x_min = (x + 3 > 6) ? 6 : x + 3;
-    y_min = y;
-    y_max = y;
-
-    if (search_pieces_in_line(x_min, x_max, y_min, y_max, inverse) == 1)
-    {
-        return 1;
-    }
-
-    // VEC4 [1,-1] diag inf
-    inverse = 1;
-    x_min = (x - 3 < 0) ? 0 : x - 3;
-    x_min = (x + 3 > 6) ? 6 : x + 3;
-    y_min = (y + 3 > 5) ? 5 : y + 3;
-    y_max = (y - 3 < 0) ? 0 : y - 3;
-
-    if (search_pieces_in_line(x_min, x_max, y_min, y_max, inverse) == 1)
-    {
-        return 1;
-    }
-
-    return 0;
+   
 }
 
 void Demarre_puissance4()
@@ -150,7 +112,6 @@ void Demarre_puissance4()
 
     while (winner == -1 && filled_case != 42)
     {   
-        printf("%d",filled_case);
         display_grille(grille);
         selected_column = ask_user_column(current_player);
         last_ligne = last_pos_avaible(selected_column);
