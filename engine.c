@@ -39,69 +39,58 @@ int last_pos_avaible(int colonne)
     return i - 1;
 }
 
-int recherche_ord_down(int x, int y, int sens) {
-    int pieces = 0;
-    int j = y;
-    while (grille[x][j] == current_player && j<6) {
-        if(sens==1) {
-            j++;
-        }
-        else {
-            j--;
-        }
-        pieces++;
-    }
-    return (pieces == 4);
-}
-
-int recherche_ord_up(int x, int y, int sens) {
-    int pieces = 0;
-    int j = y;
-    while (grille[x][j] == current_player &&j > 0) {
-        if(sens==1) {
-            j++;
-        }
-        else {
-            j--;
-        }
-        pieces++;
-    }
-    return (pieces == 4);
-}
-
-int recherche_abs(int x, int y, int sens) {
-    int pieces = 0;
-    int i = x;
-    while (grille[i][y] == current_player && i<7) {
-        if(sens==1) {
-            i++;
-        }
-        else {
-            i--;
-        }
-        pieces++;
-    }
-    return (pieces == 4);
-}
-
-int recherche_abs(int x, int y, int sens) {
-    int pieces = 0;
-    int i = x;
-    while (grille[i][y] == current_player && i<7) {
-        if(sens==1) {
+int recherche_ord(int x, int y)
+{
+    int pieces = 0, i = 0;
+    int y_min = (y - 3 < 0) ? 0 : y - 3;
+    int y_max = (y + 3 > 5) ? 5 : y + 3;
+    for (i = y_min; i < (y_max + 1); i++)
+    {
+        if (grille[x][i] == current_player)
+        {
             pieces++;
         }
-        else {
-            pieces--;
+        else
+        {
+            pieces = 0;
+        }
+
+        if (pieces >= 4)
+        {
+            return 1;
         }
     }
-    return (pieces == 4);
+    return 0;
+}
+
+int recherche_abs(int x, int y)
+{
+    int pieces = 0, i = 0;
+    int x_min = (x - 3 < 0) ? 0 : x - 3;
+    int x_max = (x + 3 > 6) ? 6 : x + 3;
+    for (i = x_min; i < (x_max + 1); i++)
+    {
+        if (grille[i][y] == current_player)
+        {
+            pieces++;
+        }
+        else
+        {
+            pieces = 0;
+        }
+
+        if (pieces >= 4)
+        {
+            return 1;
+        }
+    }
+    return 0;
 }
 
 // Renvoie 1 (vrai) si une ligne de 4 pions est détectée
 int is_winning_line(int x, int y)
 {
-   
+    return (recherche_ord(x,y)||recherche_abs(x,y));
 }
 
 void Demarre_puissance4()
@@ -111,7 +100,7 @@ void Demarre_puissance4()
     int last_ligne;
 
     while (winner == -1 && filled_case != 42)
-    {   
+    {
         display_grille(grille);
         selected_column = ask_user_column(current_player);
         last_ligne = last_pos_avaible(selected_column);
