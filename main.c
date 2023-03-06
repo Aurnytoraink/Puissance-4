@@ -1,5 +1,6 @@
 #include "engine.h"
 
 void main() {
-    Demarre_puissance4();
+    // Demarre_puissance4();
+    test_grille();
 }

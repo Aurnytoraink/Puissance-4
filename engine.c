@@ -2,7 +2,14 @@
 #include <stdio.h>
 
 // Var globale
-int grille[7][6];
+// int grille[7][6];
+int grille[7][6] = {-1,-1,0,0,0,0,
+                    -1,-1,-1,0,-1,-1,
+                    -1,-1,0,0,-1,1,
+                    -1,-1,-1,0,1,-1,
+                    -1,-1,-1,1,0,-1,
+                    -1,-1,1,-1,-1,0,
+                    -1,-1,-1,-1,-1,-1};
 int winner = -1;
 int current_player = 0;
 int filled_case = 0;
@@ -87,10 +94,87 @@ int recherche_abs(int x, int y)
     return 0;
 }
 
+int recherche_diag_inf(int x, int y)
+{
+    int pieces = 0, i = 0;
+    int min = 0, max = 0;
+    
+    int x_min = (x - 3 < 0) ? 0 : x - 3;
+    int x_max = (x + 3 > 6) ? 6 : x + 3;
+    int y_min = (y - 3 < 0) ? 0 : y - 3;
+    int y_max = (y + 3 > 5) ? 5 : y + 3;
+
+    if (x>y) {
+        min = y_min;
+        max = x_max;
+    }
+    else {
+        min = x_min;
+        max = y_max;
+    }
+
+    for (i = min; i < (max + 1); i++)
+    {
+        if (grille[x+i][y+i] == current_player)
+        {
+            pieces++;
+        }
+        else
+        {
+            pieces = 0;
+        }
+
+        if (pieces >= 4)
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int recherche_diag_sup(int x, int y)
+{
+    int pieces = 0, i = 0;
+    int min = 0, max = 0;
+    
+    int x_max = (x + 3 > 6) ? 6 : x + 3;
+    int y_min = (y - 3 < 0) ? 0 : y - 3;
+
+    min = y_min;
+    max = x_max;
+
+    for (i = min; i < (max + 1); i++)
+    {
+        if (grille[x-i][y+i] == current_player)
+        {
+            pieces++;
+        }
+        else
+        {
+            pieces = 0;
+        }
+
+        if (pieces >= 4)
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+
 // Renvoie 1 (vrai) si une ligne de 4 pions est détectée
 int is_winning_line(int x, int y)
 {
-    return (recherche_ord(x,y)||recherche_abs(x,y));
+    int ord = recherche_ord(x,y);
+    int abs = recherche_abs(x,y);
+    int diag_inf = recherche_diag_inf(x,y);
+    int diag_sup = recherche_diag_sup(x,y);
+
+    printf("%d,%d,%d,%d\n",ord,abs,diag_inf,diag_sup);
+
+    return(ord||abs||diag_inf||diag_sup);
+    // return (recherche_ord(x,y)||recherche_abs(x,y)||recherche_diag_inf(x,y)||recherche_diag_sup(x,y));
 }
 
 void Demarre_puissance4()
@@ -134,4 +218,13 @@ void Demarre_puissance4()
     {
         display_winner(current_player);
     }
+}
+
+// Partie de teste
+void test_grille() {
+    
+    display_grille(grille);
+    is_winning_line(0,2);
+    is_winning_line(1,3);
+    is_winning_line(5,2);
 }
