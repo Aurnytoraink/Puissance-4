@@ -43,6 +43,43 @@ void display_grille(int tab[][6])
     }
 }
 
+void display_grille_debug(int tab[][6])
+{
+    printf("\n\n0 1 2 3 4 5 6\n");
+    char line[15] = {'#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', ' ', '%'};
+    // line = malloc (sizeof (*line) * 8);
+    int x, y, i;
+    for (y = 0; y < 6; y++)
+    {
+        for (x = 0, i = 0; x < 7, i<13; x++, i = i + 2)
+        {
+            switch (tab[x][y])
+            {
+            case -1: // vide
+            {
+                line[i] = '#';
+            }
+            break;
+
+            case 0: // Joueur 1
+            {
+               line[i] = '0';
+            }
+            break;
+
+            case 1: // Joueur 2
+            {
+                line[i] = '1';
+            }
+            break;
+
+            }
+        }
+        line[15] = ("%s",48+y);
+        printf("%s\n",line);
+    }
+}
+
 int ask_user_column(int current_player)
 {   
     int selected_column = 0;
@@ -65,4 +102,8 @@ void no_more_space_avaible() {
 
 void display_winner(int player) {
     printf("Bravo joueur %d !\nTu es vraiment intelligent.\nTiens, tu as gagné un cookie !",player + 1);
+}
+
+void display_full() {
+    printf("Plus de place !\nVous êtes à égalité !");
 }
