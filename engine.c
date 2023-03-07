@@ -1,7 +1,8 @@
 #include "IHM.h"
 
 // Var globale
-// int grille[7][6];
+// grille de test
+// ne perturbe pas le jeu en mode normal car la grille est réinitialisée
 int grille[7][6] = {-1,-1,0,0,0,0,
                     -1,-1,-1,0,-1,-1,
                     -1,-1,0,0,-1,1,
@@ -203,7 +204,6 @@ void Demarre_puissance4()
 
 // Partie de teste
 void test_grille() {
-    
     display_grille_debug(grille);
     is_winning_line(0,2);
     is_winning_line(1,3);
