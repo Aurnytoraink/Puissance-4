@@ -5,3 +5,5 @@ void column_out_of_range();
 void no_more_space_avaible();
 void display_winner(int player);
 void display_full();
+int ask_two_players();
+void AI_has_played(int column);
