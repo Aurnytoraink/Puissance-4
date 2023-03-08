@@ -1,6 +1,5 @@
 #include "IHM.h"
 #include "AI.h"
-#include <stdio.h>
 
 // Var globale
 // grille de test
@@ -141,15 +140,7 @@ int recherche_diag_sup(int x, int y)
 // Renvoie 1 (vrai) si une ligne de 4 pions est détectée
 int is_winning_line(int x, int y)
 {
-    int ord = recherche_ord(x,y);
-    int abs = recherche_abs(x,y);
-    int diag_inf = recherche_diag_inf(x,y);
-    int diag_sup = recherche_diag_sup(x,y);
-
-    printf("%d,%d,%d,%d\n",ord,abs,diag_inf,diag_sup);
-
-    return(ord||abs||diag_inf||diag_sup);
-    // return (recherche_ord(x, y) || recherche_abs(x, y) || recherche_diag_inf(x, y) || recherche_diag_sup(x, y));
+    return (recherche_ord(x, y) || recherche_abs(x, y) || recherche_diag_inf(x, y) || recherche_diag_sup(x, y));
 }
 
 void Demarre_puissance4()
@@ -162,13 +153,13 @@ void Demarre_puissance4()
 
     while (winner == -1 && filled_case != 42)
     {
-        display_grille(grille);
         if (two_player == 0 && current_player == 1)
         {
             selected_column = play_move(0);
         }
         else
-        {
+        {   
+            display_grille(grille);
             selected_column = ask_user_column(current_player);
         }
         last_ligne = last_pos_avaible(selected_column);
