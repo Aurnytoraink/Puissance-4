@@ -1,10 +1,17 @@
 #include "IHM.h"
 #include "AI.h"
 
+#define ROWS 6
+#define COLUMNS 7
+
+#define EMPTY -1
+#define J1 0
+#define J2 1
+
 // Var globale
 // grille de test
 // ne perturbe pas le jeu en mode normal car la grille est réinitialisée
-int grille[7][6] = {-1, -1, 0, 0, 0, 0,
+int grille[COLUMNS][ROWS] = {-1, -1, 0, 0, 0, 0,
                     -1, -1, -1, 0, -1, -1,
                     -1, -1, 0, 0, -1, 1,
                     -1, -1, -1, 0, 1, -1,
@@ -12,18 +19,18 @@ int grille[7][6] = {-1, -1, 0, 0, 0, 0,
                     -1, -1, 1, -1, -1, 0,
                     -1, -1, -1, -1, -1, -1};
 int winner = -1;
-int current_player = 0;
+int current_player = J1;
 int filled_case = 0;
 
 // Réinitialise la grille
 void reset_grille()
 {
     int x, y;
-    for (x = 0; x < 7; x++)
+    for (x = 0; x < COLUMNS; x++)
     {
-        for (y = 0; y < 6; y++)
+        for (y = 0; y < ROWS; y++)
         {
-            grille[x][y] = -1;
+            grille[x][y] = EMPTY;
         }
     }
 }
@@ -33,13 +40,13 @@ void reset_grille()
 int last_pos_avaible(int colonne)
 {
     int i = 0;
-    if (grille[colonne][i] != -1)
+    if (grille[colonne][i] != EMPTY)
     {
         return -1;
     }
-    for (i = 1; i < 6; i++)
+    for (i = 1; i < ROWS; i++)
     {
-        if (grille[colonne][i] != -1)
+        if (grille[colonne][i] != EMPTY)
         {
             break;
         }
@@ -163,7 +170,7 @@ void Demarre_puissance4()
             selected_column = ask_user_column(current_player);
         }
         last_ligne = last_pos_avaible(selected_column);
-        if (last_ligne != -1)
+        if (last_ligne != EMPTY)
         {
             grille[selected_column][last_ligne] = current_player;
             filled_case++;
