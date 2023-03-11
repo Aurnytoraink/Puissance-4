@@ -1,20 +1,35 @@
 # Puissance 4
 
-## V1
+## Versions
+
+### V1 (Mise en place de la base) ✅
 
 accueil()
 2 joueurs
 
 ? structure de données (détection de données)
 
-- Affichage()
-- saisir un coup
-- winner()
+- Affichage dans un terminal
+- Saisir un coup
+- Détection de victoire
 
-## V2
+### V2 (Jouer contre l'ordinateur)
 
-- ajouter un robot(naïf, random, intelligent)
+3 modes :
+- aléatoire
+- attaquant
+- défensif
 
-## V3
+### V3 (GUI)
 
-- application graphique (SDL ou autre)
+Utilisation de la bibliothèque graphique SDL 
+
+## TODO
+
+- Mettre les variables globales dans le header de `engine.h`
+- Créer un fichier `test.c` qui réalise tous les tests
+- Rajouter des commentaires et explications
+- Utilisation de pseudo pour les joueurs
+- Possibilité de rejouer
+  - Comptabiliser les victoires
+  - Le premier joueur est choisi aléatoirement ensuite c'est le perdant
