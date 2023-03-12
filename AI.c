@@ -4,6 +4,8 @@
 
 int play_random()
 {
+    time_t t;
+    srand((unsigned) time(&t)); // Initialisation du générateur
     return rand()%7;
 }
 
