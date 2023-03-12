@@ -1,6 +1,7 @@
 #include "AI.h"
 
 #include <stdlib.h>
+#include <time.h>
 
 int play_random()
 {
@@ -14,8 +15,7 @@ int play_hard()
     //Utilisation de l'algorithme Minimax avec élagage alpha-beta
 }
 
-int play_move(int mode)
-{
+int play_move(int mode) {
     switch (mode)
     {
     case 0:
@@ -29,4 +29,5 @@ int play_move(int mode)
         return play_hard();
     }
     break;
+    }
 }
