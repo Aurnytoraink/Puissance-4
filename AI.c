@@ -9,12 +9,9 @@ int play_random()
     return rand()%7;
 }
 
-int play_attaque()
+int play_hard()
 {
-}
-
-int play_defense()
-{
+    //Utilisation de l'algorithme Minimax avec élagage alpha-beta
 }
 
 int play_move(int mode)
@@ -29,14 +26,7 @@ int play_move(int mode)
 
     case 1:
     {
-        return play_attaque();
+        return play_hard();
     }
     break;
-
-    case 2:
-    {
-        return play_defense();
-    }
-    break;
-    }
 }
