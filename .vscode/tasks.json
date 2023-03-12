@@ -8,6 +8,7 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${fileDirname}/*.c",
+                "$sdl2-config --cflags --libs",
                 "-o",
                 "${fileDirname}/build/${fileBasenameNoExtension}"
             ],
