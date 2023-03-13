@@ -152,11 +152,14 @@ int is_winning_line(int x, int y)
 
 void Demarre_puissance4()
 {
+    welcome_page();
+
     reset_grille();
     int selected_column;
     int last_ligne;
 
     int two_player = ask_two_players();
+
 
     while (winner == -1 && filled_case != 42)
     {

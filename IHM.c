@@ -4,6 +4,28 @@
 
 #include "IHM.h"
 
+#define RED "\x1b[31m"
+#define GREEN "\x1b[32m"
+#define YELLOW "\x1b[33m"
+#define BLUE "\x1b[34m"
+#define MAGENTA "\x1b[35m"
+#define CYAN "\x1b[36m"
+#define RESET "\x1b[0m"
+
+void welcome_page()
+{
+    printf(RED "P" RESET);
+    printf(YELLOW "U" RESET);
+    printf(GREEN "I" RESET );
+    printf(BLUE "S" RESET );
+    printf(MAGENTA "S" RESET);
+    printf(CYAN "A" RESET );
+    printf(RED "N" RESET );
+    printf(YELLOW "C" RESET );
+    printf(GREEN "E" RESET );
+    printf(" 4\n"); 
+}
+
 // tab est un tableau a deux dim
 void display_grille(int tab[][6])
 {
@@ -111,7 +133,7 @@ int ask_two_players()
     int choice = -1;
     do
     {
-        printf("Veux-tu jouer seul (choix 0) ou contre un adversaire (choix 1)\n");
+        printf("Veux-tu jouer seul (choix 0) ou contre un adversaire (choix 1) ? ");
         scanf("%d", &choice);
     } while (choice != 0 && choice != 1);
     return choice;

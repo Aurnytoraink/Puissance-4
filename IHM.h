@@ -1,3 +1,4 @@
+void welcome_page();
 void display_grille(int tab[][6]);
 void display_grille_debug(int tab[][6]);
 int ask_user_column(int current_player);
