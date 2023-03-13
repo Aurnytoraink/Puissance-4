@@ -8,3 +8,5 @@ void display_winner(int player);
 void display_full();
 int ask_two_players();
 void AI_has_played(int column);
+int ask_play_again();
+void thanks_message();

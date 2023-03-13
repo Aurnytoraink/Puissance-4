@@ -1,6 +1,7 @@
 #include "IHM.h"
 #include "AI.h"
 
+// Définition des constantes
 #define ROWS 6
 #define COLUMNS 7
 
@@ -9,17 +10,8 @@
 #define J2 1
 
 // Var globale
-// grille de test
-// ne perturbe pas le jeu en mode normal car la grille est réinitialisée
-int grille[COLUMNS][ROWS] = {-1, -1, 0, 0, 0, 0,
-                    -1, -1, -1, 0, -1, -1,
-                    -1, -1, 0, 0, -1, 1,
-                    -1, -1, -1, 0, 1, -1,
-                    -1, -1, -1, 1, 0, -1,
-                    -1, -1, 1, -1, -1, 0,
-                    -1, -1, -1, -1, -1, -1};
-int winner = -1;
-int current_player = J1;
+int grille[COLUMNS][ROWS] = {0};
+int current_player = J2;
 int filled_case = 0;
 
 // Réinitialise la grille
@@ -152,65 +144,86 @@ int is_winning_line(int x, int y)
 
 void Demarre_puissance4()
 {
+    // Affiche la phrase d'accueil
     welcome_page();
 
+    // Vide la grille et initialise des variables
     reset_grille();
-    int selected_column;
-    int last_ligne;
+    int selected_column = 0, last_row = 0;
+    int exit = 0;
+    int winner = -1;
 
+    // Choix du mode (2 joueurs ou IA)
     int two_player = ask_two_players();
 
-
-    while (winner == -1 && filled_case != 42)
+    while (exit == 0)
     {
-        if (two_player == 0 && current_player == 1)
+        while (is_winning_line(selected_column, last_row) == 0 && filled_case != 42)
         {
-            selected_column = play_move(0);
-        }
-        else
-        {   
-            display_grille(grille);
-            selected_column = ask_user_column(current_player);
-        }
-        last_ligne = last_pos_avaible(selected_column);
-        if (last_ligne != EMPTY)
-        {
-            grille[selected_column][last_ligne] = current_player;
+            //Cette variable est utilisé dans la boucle suivante afin de savoir d'afficher le message d'information lorsque le joueur a saisi une colonne déjà pleine
+            int state = 0;
+            current_player = !current_player; // alternance entre le J1 et J2
+
+            do
+            {   
+
+                if (two_player == 0 && current_player == 1)
+                {
+                    selected_column = play_move(0);
+                }
+                else
+                {
+                    display_grille(grille); // On affiche la grille seulement lorsque c'est un joueur et non l'IA
+                    selected_column = ask_user_column(current_player);
+                    state == 0 ? : no_more_space_avaible();
+                }
+
+                last_row = last_pos_avaible(selected_column);
+                state = 1;
+            } while (last_row == EMPTY);
+
+            
+            grille[selected_column][last_row] = current_player;
             filled_case++;
-            if (is_winning_line(selected_column, last_ligne) == 1)
-            {
-                winner = current_player;
-            }
-            else
-            {
-                current_player = !current_player; // alternance entre le J1 et J2
-            }
         }
 
+        //Teste si la partie s'est terminée car il y a un vainqueur ou si la grille est pleine 
+        filled_case == 42 ? display_full() : display_winner(current_player);
+
+        //Demande si le joueur veut rejouer
+        if (ask_play_again() == 0) {
+            exit = 0;
+            reset_grille();
+            current_player = J2;
+        }
         else
         {
-            no_more_space_avaible();
+            exit = 1;
+            thanks_message();
         }
-    }
-
-    display_grille(grille);
-
-    if (filled_case == 42)
-    {
-        display_full();
-    }
-    else
-    {
-        display_winner(current_player);
+        
     }
 }
 
+/*
 // Partie de teste
+//les print ne sont pas inclus
+
+// grille de test
+int grille[COLUMNS][ROWS] = {-1, -1, 0, 0, 0, 0,
+                             -1, -1, -1, 0, -1, -1,
+                             -1, -1, 0, 0, -1, 1,
+                             -1, -1, -1, 0, 1, -1,
+                             -1, -1, -1, 1, 0, -1,
+                             -1, -1, 1, -1, -1, 0,
+                             -1, -1, -1, -1, -1, -1};
+
 void test_grille()
 {
     display_grille_debug(grille);
-    is_winning_line(0, 2);
-    is_winning_line(1, 3);
+    is_winning_line(0, 2); //victoire verticale
+    is_winning_line(1, 3); //victoire horizontale
     current_player = 1;
-    is_winning_line(5, 2);
+    is_winning_line(5, 2); //victoire diag sup
 }
+*/

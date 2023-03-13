@@ -120,12 +120,12 @@ void no_more_space_avaible()
 
 void display_winner(int player)
 {
-    printf("Bravo joueur %d !\nTu es vraiment intelligent.\nTiens, tu as gagne un cookie !", player + 1);
+    printf("\nBravo joueur %d !\nTu es vraiment intelligent.\nTiens, tu as gagne un cookie !\n\n", player + 1);
 }
 
 void display_full()
 {
-    printf("Plus de place !\nVous etes a egalite !");
+    printf("Plus de place !\nVous etes a egalite !\n\n");
 }
 
 int ask_two_players()
@@ -133,7 +133,7 @@ int ask_two_players()
     int choice = -1;
     do
     {
-        printf("Veux-tu jouer seul (choix 0) ou contre un adversaire (choix 1) ? ");
+        printf("Veux-tu jouer seul (choix 0) ou contre un adversaire (choix 1) ?\n");
         scanf("%d", &choice);
     } while (choice != 0 && choice != 1);
     return choice;
@@ -142,4 +142,19 @@ int ask_two_players()
 void AI_has_played(int column)
 {
     printf("L'IA a joue la colonne %d", column);
+}
+
+int ask_play_again() {
+    int choice = -1;
+    do
+    {
+        printf("Souhaites-tu rejouer ?\n[0]Oui [1]Non\n");
+        scanf("%d", &choice);
+    } while (choice != 0 && choice != 1);
+    return choice;
+}
+
+void thanks_message() {
+    printf("\nNoooon, quel dommage !\nMerci d'avoir joue a\n");
+    welcome_page();
 }

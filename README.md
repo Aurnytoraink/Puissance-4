@@ -15,10 +15,13 @@ accueil()
 
 ### V2 (Jouer contre l'ordinateur)
 
-3 modes :
-- aléatoire
-- attaquant
-- défensif
+2 modes :
+- aléatoire ✅
+- algorithme minimax avec élagage alphabeta
+
+#### Aléatoire
+
+Il faudrait que la fonction est accès colonne restante (non pleine), afin de réduire le choix et éviter le cas où le même nombre généré plusieurs fois de suite correspond à une colonne pleine
 
 ### V3 (GUI)
 
@@ -26,10 +29,12 @@ Utilisation de la bibliothèque graphique SDL
 
 ## TODO
 
+- Retirer tous les accents et caractères spéciaux
 - Mettre les variables globales dans le header de `engine.h`
 - Créer un fichier `test.c` qui réalise tous les tests
 - Rajouter des commentaires et explications
 - Utilisation de pseudo pour les joueurs
-- Possibilité de rejouer
+- Possibilité de rejouer ✅
   - Comptabiliser les victoires
   - Le premier joueur est choisi aléatoirement ensuite c'est le perdant
+- Affichage spécial en cas de défaite du joueur contre IA
