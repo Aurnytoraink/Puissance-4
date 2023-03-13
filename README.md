@@ -17,21 +17,21 @@ accueil()
 
 2 modes :
 - aléatoire ✅
-- algorithme minimax avec élagage alphabeta
+- algorithme minimax avec élagage alphabeta ❌ (manque de temps)
 
 #### Aléatoire
 
-Il faudrait que la fonction est accès colonne restante (non pleine), afin de réduire le choix et éviter le cas où le même nombre généré plusieurs fois de suite correspond à une colonne pleine
+Il faudrait que la fonction est accès aux colonnes restantes (non pleines), afin d'éviter le cas où une même colonne pleine est tirée au sort plusieurs fois d'affilé.
 
-### V3 (GUI)
+### V3 (GUI) ❌ (manque de temps)
 
 Utilisation de la bibliothèque graphique SDL 
 
 ## TODO
 
 - Retirer tous les accents et caractères spéciaux
-- Mettre les variables globales dans le header de `engine.h`
-- Créer un fichier `test.c` qui réalise tous les tests
+- Mettre les variables globales dans le header de `engine.h` ❌
+- Créer un fichier `test.c` qui réalise tous les tests ❌
 - Rajouter des commentaires et explications
 - Utilisation de pseudo pour les joueurs
 - Possibilité de rejouer ✅
